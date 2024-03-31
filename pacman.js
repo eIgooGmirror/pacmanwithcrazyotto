@@ -167,6 +167,7 @@ var GAME_MSPACMAN = 1;
 var GAME_COOKIE = 2;
 var GAME_OTTO = 3;
 
+
 var practiceMode = false;
 var turboMode = false;
 
@@ -174,7 +175,7 @@ var turboMode = false;
 var gameMode = GAME_PACMAN;
 var getGameName = (function(){
 
-    var names = ["PAC-MAN", "MS PAC-MAN", "COOKIE-MAN","CRAZY OTTO"];
+    var names = ["PAC-MAN", "MS PAC-MAN", "COOKIE MAN", "CRAZY OTTO"];
     
     return function(mode) {
         if (mode == undefined) {
@@ -9590,7 +9591,7 @@ var homeState = (function(){
         menu.disable();
     };
 
-    var menu = new Menu("CHOOSE A GAME",2*tileSize,0*tileSize,mapWidth-4*tileSize,3*tileSize,tileSize,tileSize+"px ArcadeR", "#EEE");
+    var menu = new Menu("CHOOSE YOUR PAC-MAN GAME",2*tileSize,0*tileSize,mapWidth-4*tileSize,3*tileSize,tileSize,tileSize+"px ArcadeR", "#EEE");
     var getIconAnimFrame = function(frame) {
         frame = Math.floor(frame/3)+1;
         frame %= 4;
@@ -9620,7 +9621,15 @@ var homeState = (function(){
         function(ctx,x,y,frame) {
             atlas.drawMsPacmanSprite(ctx,x,y,DIR_RIGHT,getIconAnimFrame(frame));
         });
-    menu.addTextIconButton(getGameName(GAME_COOKIE),
+    menu.addTextIconButton(getGameName(GAME_OTTO),
+        function() {
+            gameMode = GAME_OTTO;
+            exitTo(preNewGameState);
+        },
+        function(ctx,x,y,frame) {
+            drawOttoSprite(ctx,x,y,DIR_RIGHT,getIconAnimFrame(frame), true);
+        });
+        menu.addTextIconButton(getGameName(GAME_COOKIE),
         function() {
             gameMode = GAME_COOKIE;
             exitTo(preNewGameState);
